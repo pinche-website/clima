@@ -12,19 +12,15 @@ class LoadingScreen extends StatefulWidget {
 
 class _LoadingScreenState extends State<LoadingScreen> {
   void getCurrentPosition() async {
-    if (kIsWeb) {
-      getCurrentPosition(value) =>
+      success(pos);
+      try
           {
-            print(value.coords.latitude),
-            print(value.coords.longitude)
-          };
-    } else {
-      Position position = await Geolocator()
-          .getCurrentPosition(desiredAccuracy: LocationAccuracy.low);
-
-      print(position);
+            print(pos.coords.latitude);
+            print(pos.coords.longitude);
+          } catch (ex) {
+        print("Exception thrown: " + ex.toString());
+      }
     }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +29,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
         child: RaisedButton(
           onPressed: () {
 // Get the current location
-         getCurrentPosition();
+         _getCurrentLocation();
 
           },
           child: Text('Get Location'),
